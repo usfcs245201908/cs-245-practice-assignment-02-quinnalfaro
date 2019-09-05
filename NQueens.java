@@ -4,7 +4,7 @@ public class NQueens {
 	private int size;
 	
 	public NQueens(int n){
-		if (n < 0){
+		if (n <= 0){
 			throw new IllegalArgumentException();
 		} else {
 			board = new int[n][n];
@@ -28,29 +28,37 @@ public class NQueens {
 		for(int i = 0; i < size; i ++){
 			if (isSafe (board, i, column)){
 				board[i][column] = 1;
+
+				if (placeNQueens(board, column + 1) == true){
+					return true;
+				}
+				board[i][column] = 0;
 			}
 		}
 
-		return true;
+		return false;
 	}	
 
 	public boolean isSafe (int[][] board, int row, int column){
-		System.out.println("HERE");
-		for(int i = 0; i < size; i ++){
+		int i, j;
+		for(i = 0; i < column; i ++){
 			if (board[row][i] == 1){
 				return false;
-			} else if (board[i][column] == 1){
-				return false;
-			} else if (board[row + i][column + i] == 1){
-				return false;
-			} else if (board[row - i][column - i] == 1){
-				return false;
-			} else if (board[row - i][column + i] == 1){
-				return false;
-			} else if (board[row + i][column - i] == 1){
-				return false;
-			}
+			} 
 		}
+
+		for(i = row, j = column; i >= 0 && j >= 0; i --, j --){
+			if (board[i][j] == 1){
+				return false;
+			} 
+		}
+
+		for(i = row, j = column; i < size && j >= 0; i ++, j --){
+			if (board[i][j] == 1){
+				return false;
+			} 
+		}
+
 		return true;
 	}
 

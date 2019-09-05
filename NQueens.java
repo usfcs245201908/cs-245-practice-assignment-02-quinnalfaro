@@ -4,15 +4,16 @@ public class NQueens {
 	private int size;
 	
 	public NQueens(int n){
-		if (n <= 0){
-			throw new IllegalArgumentException();
-		} else {
-			board = new int[n][n];
-			size = n;
-		}
+		
+		board = new int[n][n];
+		size = n;
+		
 	}
 
 	public boolean placeNQueens () {
+		if (size <= 0){
+			throw new IllegalArgumentException();
+		}
 		if (placeNQueens(board, 0)){
 			return true;
 		}

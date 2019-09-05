@@ -13,10 +13,10 @@ public class NQueens {
 	public boolean placeNQueens () {
 		if (size <= 0){
 			throw new IllegalArgumentException();
-		}
-		if (placeNQueens(board, 0)){
+		} else if (placeNQueens(board, 0)){
 			return true;
 		}
+		 
 		return false;
 	}
 
@@ -42,6 +42,7 @@ public class NQueens {
 
 	public boolean isSafe (int[][] board, int row, int column){
 		int i, j;
+		//condense to one loop? Would this make it more efficient?
 		for(i = 0; i < column; i ++){
 			if (board[row][i] == 1){
 				return false;
